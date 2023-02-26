@@ -32,16 +32,16 @@ EmojiNetworkLog.enable({
 
 // The following requests will automatically log information about each request for quick scanning
 await fetch(`/found-average-speed`, { method: `POST` })
-// POST /found-average-speed 🐇 400ms ✅ 200
+// 🐇 POST /found-average-speed 400ms ✅ 200
 
 await fetch(`/not-found-slowly`)
-// GET /not-found-slowly 🐢 1022ms ❌ 404
+// 🐢 GET /not-found-slowly 1022ms ❌ 404
 
 await fetch(`/error-but-fast`, { method: `DELETE` })
-// DELETE /error-but-fast 🚀 150ms 🔥 500
+// 🚀 DELETE /error-but-fast 150ms 🔥 500
 
 await fetch(`/redirect-average-speed`)
-// GET /redirect-average-speed 🐇 400ms ❌ 302
+// 🐇 GET /redirect-average-speed 400ms ❌ 302
 
 // To turn it off
 EmojiNetworkLog.disable();
