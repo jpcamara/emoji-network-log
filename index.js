@@ -74,11 +74,11 @@ export class EmojiNetworkLog {
 
     const status = this.#statusEmoji(statusCode);
     if (end <= EmojiNetworkLog.fastThreshold) {
-      console.log(requestType, url, EmojiNetworkLog.fast, `${end}ms`, `${status} ${statusCode}`);
+      console.log(EmojiNetworkLog.fast, requestType, url, `${end}ms`, `${status} ${statusCode}`);
     } else if (end <= EmojiNetworkLog.averageThreshold) {
-      console.log(requestType, url, EmojiNetworkLog.average, `${end}ms`, `${status} ${statusCode}`);
+      console.log(EmojiNetworkLog.average, requestType, url, `${end}ms`, `${status} ${statusCode}`);
     } else {
-      console.log(requestType, url, EmojiNetworkLog.slow, `${end}ms`, `${status} ${statusCode}`);
+      console.log(EmojiNetworkLog.slow, requestType, url, `${end}ms`, `${status} ${statusCode}`);
     }
   }
   

@@ -1,6 +1,6 @@
 {
   "name": "emoji-network-log",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Visually scan your browser console logs using the power of emojis 🐢 🐇 🚀",
   "main": "index.js",
   "scripts": {
