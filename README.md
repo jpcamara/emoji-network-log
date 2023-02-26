@@ -19,15 +19,17 @@ EmojiNetworkLog.enable({
   slow: `🐢`,
   average: `🐇`,
   fast: `🚀`,
-  slowThreshold: 1000,
-  averageThreshold: 500,
-  fastThreshold: 150,
-  info: `🧠`,
-  success: `✅`,
-  redirect: `🔁`,
-  bad: `❌`,
-  error: `🔥`,
-  cancelled: `❓`,
+  slowThreshold: 1000,   // Default slow is <= 1000 ms
+  averageThreshold: 500, // Default average is <= 500ms
+  fastThreshold: 150,    // Default fast is <= 150ms
+  info: `🧠`,            // 100-199
+  success: `✅`,         // 200-299
+  redirect: `🔁`,        // 300-399
+  bad: `❌`,             // 400-499
+  error: `🔥`,           // 500-599
+  cancelled: `❓`,       // < 100
+  timingLevel: `slow`,   // Default to only logging slow requests
+  statusLevel: `bad`,    // Default to always logging bad (400-499) requests
 });
 
 // The following requests will automatically log information about each request for quick scanning

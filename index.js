@@ -11,6 +11,11 @@ export class EmojiNetworkLog {
   static bad = `❌`;
   static error = `🔥`;
   static cancelled = `❓`;
+  static invalid = `👺`;
+  static timingLevel = `slow`;
+  static statusLevel = `bad`;
+  static #timingPriority = [`invalid`, `slow`, `average`, `fast`];
+  static #statusPriority = [`invalid`, `error`, `bad`, `redirect`, `success`, `info`, `cancelled`];
   static #enabled = false;
 
   static enable(options = {}) {
@@ -72,31 +77,44 @@ export class EmojiNetworkLog {
       return;
     }
 
-    const status = this.#statusEmoji(statusCode);
-    if (end <= EmojiNetworkLog.fastThreshold) {
-      console.log(EmojiNetworkLog.fast, requestType, url, `${end}ms`, `${status} ${statusCode}`);
-    } else if (end <= EmojiNetworkLog.averageThreshold) {
-      console.log(EmojiNetworkLog.average, requestType, url, `${end}ms`, `${status} ${statusCode}`);
-    } else {
-      console.log(EmojiNetworkLog.slow, requestType, url, `${end}ms`, `${status} ${statusCode}`);
+    const status = this.#statusType(statusCode);
+    const timing = this.#timingType(end);
+    const timingLevel = EmojiNetworkLog.#timingPriority.indexOf(EmojiNetworkLog.timingLevel);
+    const statusLevel = EmojiNetworkLog.#statusPriority.indexOf(EmojiNetworkLog.statusLevel);
+    const foundTimingLevel = EmojiNetworkLog.#timingPriority.indexOf(timing);
+    const foundStatusLevel = EmojiNetworkLog.#statusPriority.indexOf(status);
+
+    if (foundStatusLevel <= statusLevel || foundTimingLevel <= timingLevel) {
+      console.log(EmojiNetworkLog[timing], requestType, url, `${end}ms`, `${EmojiNetworkLog[status]} ${statusCode}`);
     }
+  }
+
+  #timingType(time) {
+    if (time <= EmojiNetworkLog.fastThreshold) {
+      return `fast`;
+    } else if (time <= EmojiNetworkLog.averageThreshold) {
+      return `average`;
+    } else if (time >= EmojiNetworkLog.slowThreshold) {
+      return `slow`;
+    }
+    return `invalid`;
   }
   
   // eslint-disable-next-line complexity
-  #statusEmoji(status) {
+  #statusType(status) {
     if (status < 100) {
-      return EmojiNetworkLog.cancelled;
+      return `cancelled`;
     } else if (status < 200) {
-      return EmojiNetworkLog.info;
+      return `info`;
     } else if (status < 300) {
-      return EmojiNetworkLog.success;
+      return `success`;
     } else if (status < 400) {
-      return EmojiNetworkLog.redirect;
+      return `redirect`;
     } else if (status < 500) {
-      return EmojiNetworkLog.bad;
+      return `bad`;
     } else if (status < 600) {
-      return EmojiNetworkLog.error;
+      return `error`;
     }
-    return ``;
+    return `invalid`;
   } 
 }
