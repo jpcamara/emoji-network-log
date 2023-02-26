@@ -36,10 +36,11 @@ export class EmojiNetworkLog {
     const self = this;
     XMLHttpRequest.prototype.open = function () {
       const start = new Date();
+      const requestType = arguments[0];
       const url = arguments[1];
       this.addEventListener(`load`, () => {
         const end = new Date().getTime() - start.getTime();
-        self.#logTiming(url, end, this.status);
+        self.#logRequest(requestType, url, end, this.status);
       });
       origOpen.apply(this, arguments);
     };
@@ -56,27 +57,28 @@ export class EmojiNetworkLog {
     window.fetch = async (...args) => {
       const start = new Date();
       const url = args[0];
+      const options = args[1] || { method: `GET` };
       const resp = await originalFetch(...args);
       const end = new Date().getTime() - start.getTime();
 
-      this.#logTiming(url, end, resp.status);
+      this.#logRequest(options.method, url, end, resp.status);
 
       return resp;
     }
   }
 
-  #logTiming(url, end, statusCode) {
+  #logRequest(requestType, url, end, statusCode) {
     if (!EmojiNetworkLog.#enabled) {
       return;
     }
 
     const status = this.#statusEmoji(statusCode);
     if (end <= EmojiNetworkLog.fastThreshold) {
-      console.log(url, EmojiNetworkLog.fast, `${end}ms`, `${status} ${statusCode}`);
+      console.log(requestType, url, EmojiNetworkLog.fast, `${end}ms`, `${status} ${statusCode}`);
     } else if (end <= EmojiNetworkLog.averageThreshold) {
-      console.log(url, EmojiNetworkLog.average, `${end}ms`, `${status} ${statusCode}`);
+      console.log(requestType, url, EmojiNetworkLog.average, `${end}ms`, `${status} ${statusCode}`);
     } else {
-      console.log(url, EmojiNetworkLog.slow, `${end}ms`, `${status} ${statusCode}`);
+      console.log(requestType, url, EmojiNetworkLog.slow, `${end}ms`, `${status} ${statusCode}`);
     }
   }
   
