@@ -6,7 +6,7 @@ Inspired by an episode of the Syntax podcast.
 
 > I wrote this really nice little handy middleware... that analyzes all my requests as they go, just timing them - and based on how long the request takes it gives me different emoji. So if the request is really fast it's a 🚀, if it's kinda fast it's a 🐇, if it's slow it's a 🐢. ...In my console while I'm just browsing the site I can just see - and it has what type of request, what path it was too, and it's just like at a glance I can see - 'oh I'm in turtle time right now - these requests to this page are all slow for some reason let me take a look'
 >
-> Scott Talinsky
+> Scott Tolinski
 > Syntax Podcast, Episode 570 - https://syntax.fm/show/570/node-js-cjs-esm
 
 ## Usage

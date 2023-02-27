@@ -4,6 +4,7 @@
   "description": "Visually scan your browser console logs using the power of emojis 🐢 🐇 🚀",
   "main": "index.js",
   "type": "module",
+  "types": "index.d.ts",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
