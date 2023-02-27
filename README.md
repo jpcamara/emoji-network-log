@@ -14,6 +14,8 @@ Inspired by an episode of the Syntax podcast.
 `EmojiNetworkLog` hooks into `fetch` and `XMLHttpRequest`, logging timing, status and request type. Timing and http status code are logged with configurable emojis so you can quickly scan your console to see how your requests are performing and investigate. Never miss "turtle time" requests again 🐢.
 
 ```js
+import { EmojiNetworkLog } from 'emoji-network-log';
+
 // Enable emoji logs
 EmojiNetworkLog.enable({
   slow: `🐢`,
@@ -47,6 +49,15 @@ await fetch(`/redirect-average-speed`)
 
 // To turn it off
 EmojiNetworkLog.disable();
+```
+
+## Usage with unpkg.com
+
+```html
+<script type="module">
+  import { EmojiNetworkLog } from 'https://unpkg.com/emoji-network-log@0.2.1/index.js';
+  EmojiNetworkLog.enable();
+</script>
 ```
 
 ## Installation

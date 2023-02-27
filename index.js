@@ -31,6 +31,10 @@ export class EmojiNetworkLog {
   }
 
   #monitorXhr() {
+    if (!globalThis.XMLHttpRequest) {
+      return;
+    }
+
     if (XMLHttpRequest._emojiNetworkLogEnabled) {
       return;
     }
@@ -52,14 +56,14 @@ export class EmojiNetworkLog {
   }
 
   #monitorFetch() {
-    if (window.fetch._emojiNetworkLogEnabled) {
+    if (globalThis.fetch._emojiNetworkLogEnabled) {
       return;
     }
 
-    window.fetch._emojiNetworkLogEnabled = true;
+    globalThis.fetch._emojiNetworkLogEnabled = true;
     
-    const originalFetch = window.fetch;
-    window.fetch = async (...args) => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (...args) => {
       const start = new Date();
       const url = args[0];
       const options = args[1] || { method: `GET` };
@@ -94,7 +98,7 @@ export class EmojiNetworkLog {
       return `fast`;
     } else if (time <= EmojiNetworkLog.averageThreshold) {
       return `average`;
-    } else if (time >= EmojiNetworkLog.slowThreshold) {
+    } else if (time > EmojiNetworkLog.averageThreshold) {
       return `slow`;
     }
     return `invalid`;
@@ -118,3 +122,4 @@ export class EmojiNetworkLog {
     return `invalid`;
   } 
 }
+EmojiNetworkLog.enable({ timingLevel: `fast` });

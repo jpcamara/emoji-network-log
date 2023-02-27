@@ -1,10 +1,11 @@
 {
   "name": "emoji-network-log",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Visually scan your browser console logs using the power of emojis 🐢 🐇 🚀",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": ""
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/jpcamara/emoji-network-log/issues"
   },
-  "homepage": "https://github.com/jpcamara/emoji-network-log#readme"
+  "homepage": "https://github.com/jpcamara/emoji-network-log#readme",
+  "devDependencies": {
+    "jest": "^29.4.3"
+  }
 }
