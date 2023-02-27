@@ -1,4 +1,4 @@
-class EmojiNetworkLog {
+export class EmojiNetworkLog {
   static slow: string;
   static average: string;
   static fast: string;
