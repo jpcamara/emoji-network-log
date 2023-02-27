@@ -64,11 +64,11 @@ export class EmojiNetworkLog {
     globalThis.fetch = async (...args) => {
       const start = new Date();
       const url = args[0];
-      const options = args[1] || { method: `GET` };
+      const options = args[1] || {};
       const resp = await originalFetch(...args);
       const end = new Date().getTime() - start.getTime();
 
-      this.#logRequest(options.method, url, end, resp.status);
+      this.#logRequest(options.method || `GET`, url, end, resp.status);
 
       return resp;
     }

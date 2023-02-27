@@ -44,8 +44,8 @@ await fetch(`/not-found-slowly`)
 await fetch(`/error-but-fast`, { method: `DELETE` })
 // 🚀 DELETE /error-but-fast 150ms 🔥 500
 
-await fetch(`/redirect-average-speed`)
-// 🐇 GET /redirect-average-speed 400ms ❌ 302
+await fetch(`/redirect-average-speed`, { redirect: `manual` })
+// 🐇 GET /redirect-average-speed 400ms 🔁 302
 
 // To turn it off
 EmojiNetworkLog.disable();
