@@ -122,4 +122,3 @@ export class EmojiNetworkLog {
     return `invalid`;
   } 
 }
-EmojiNetworkLog.enable({ timingLevel: `fast` });
