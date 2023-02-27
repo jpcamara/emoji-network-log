@@ -17,6 +17,7 @@ export class EmojiNetworkLog {
   static #timingPriority = [`invalid`, `slow`, `average`, `fast`];
   static #statusPriority = [`invalid`, `error`, `bad`, `redirect`, `success`, `info`, `cancelled`];
   static #enabled = false;
+  static #patched = false;
 
   static enable(options = {}) {
     Object.assign(EmojiNetworkLog, options);
@@ -24,6 +25,7 @@ export class EmojiNetworkLog {
     emojiLog.#monitorXhr();
     emojiLog.#monitorFetch();
     EmojiNetworkLog.#enabled = true;
+    EmojiNetworkLog.#patched = true;
   }
 
   static disable() {
@@ -35,11 +37,9 @@ export class EmojiNetworkLog {
       return;
     }
 
-    if (XMLHttpRequest._emojiNetworkLogEnabled) {
+    if (EmojiNetworkLog.#patched) {
       return;
     }
-
-    XMLHttpRequest._emojiNetworkLogEnabled = true;
 
     const origOpen = XMLHttpRequest.prototype.open;
     const self = this;
@@ -56,11 +56,9 @@ export class EmojiNetworkLog {
   }
 
   #monitorFetch() {
-    if (globalThis.fetch._emojiNetworkLogEnabled) {
+    if (EmojiNetworkLog.#patched) {
       return;
     }
-
-    globalThis.fetch._emojiNetworkLogEnabled = true;
     
     const originalFetch = globalThis.fetch;
     globalThis.fetch = async (...args) => {

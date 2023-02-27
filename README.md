@@ -55,7 +55,7 @@ EmojiNetworkLog.disable();
 
 ```html
 <script type="module">
-  import { EmojiNetworkLog } from 'https://unpkg.com/emoji-network-log@0.2.2/index.js';
+  import { EmojiNetworkLog } from 'https://unpkg.com/emoji-network-log@0.2.3/index.js';
   EmojiNetworkLog.enable();
 </script>
 ```
