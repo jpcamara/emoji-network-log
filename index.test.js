@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals';
 import { EmojiNetworkLog } from "./index";
 
-beforeEach(() => EmojiNetworkLog.enable());
+beforeEach(() => EmojiNetworkLog.enable({ timingLevel: `fast` }));
 afterEach(() => EmojiNetworkLog.disable());
 
 test(`logs fetch request`, async () => {
