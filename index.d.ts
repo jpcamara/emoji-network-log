@@ -16,22 +16,22 @@ export class EmojiNetworkLog {
   static statusLevel: `info` | `success` | `redirect` | `bad` | `error` | `cancelled`;
 
   static enable(options: { 
-    slow: string;
-    average: string;
-    fast: string;
-    slowThreshold: number;
-    averageThreshold: number;
-    fastThreshold: number;
-    info: string;
-    success: string;
-    redirect: string;
-    bad: string;
-    error: string;
-    cancelled: string;
-    invalid: string;
-    timingLevel: `slow` | `average` | `fast`;
-    statusLevel: `info` | `success` | `redirect` | `bad` | `error` | `cancelled`;
-  }): void;
+    slow?: string;
+    average?: string;
+    fast?: string;
+    slowThreshold?: number;
+    averageThreshold?: number;
+    fastThreshold?: number;
+    info?: string;
+    success?: string;
+    redirect?: string;
+    bad?: string;
+    error?: string;
+    cancelled?: string;
+    invalid?: string;
+    timingLevel?: `slow` | `average` | `fast`;
+    statusLevel?: `info` | `success` | `redirect` | `bad` | `error` | `cancelled`;
+  } = {}): void;
 
   static disable(): void;
 }
